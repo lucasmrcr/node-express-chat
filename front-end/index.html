@@ -28,7 +28,7 @@
 				<i class="fa fa-circle"></i>
 			</div>
 			<div class="title">
-				<span>RIL - CHAT</span>
+				<span>RIL - CHAT (<span id="connected-members"></span> utilisateur(s) connectés)</span>
 			</div>
 			<div class="expand">
 				<i class="fa fa-expand"></i>
@@ -62,33 +62,15 @@
 			<div class="chat-area">
 				<div class="title"><b>Conversation title</b><i class="fa fa-search"></i></div>
 				<div class="chat-list">
-					<ul>
-						<li class="me">
-							<div class="name">
-								<span class="">John Doe</span>
-							</div>
-							<div class="message">
-								<p>Hello</p>
-								<span class="msg-time">5:00 pm</span>
-							</div>
-						</li>
-						<li class="">
-							<div class="name">
-								<span class="">Christian Smith</span>
-							</div>
-							<div class="message">
-								<p>World</p>
-								<span class="msg-time">5:01 pm</span>
-							</div>
-						</li>
+					<ul id="message-container">
 					</ul>
 				</div>
 				<div class="input-area">
 					<div class="input-wrapper">
-						<input type="text" value="" placeholder="Message here">
+						<input type="text" value="" placeholder="Message here" id="send-message-field">
 						<i class="fa fa-smile-o"></i>
 					</div>
-					<input type="button" value="Submit" class="send-btn">
+					<input type="button" value="Submit" class="send-btn" id="send-message-btn">
 				</div>
 			</div>
 			<div class="right-tabs">
@@ -101,11 +83,7 @@
 				</ul>
 				<ul class="tabs-container">
 					<li class="active">
-						<ul class="member-list">
-							<li><span class="status online"><i class="fa fa-circle-o"></i></span><span>John Doe</span>
-							</li>
-							<li><span class="status online"><i class="fa fa-circle-o"></i></span><span>Christian
-									Smith</span></li>
+						<ul class="member-list" id="member-list">
 						</ul>
 					</li>
 					<li></li>

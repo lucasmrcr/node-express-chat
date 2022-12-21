@@ -1,7 +1,9 @@
 require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
 
-// export one function that gets called once as the server is being initialized
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+
 module.exports = function (app, server) {
 
     app.use((req, res, next) => {
@@ -15,7 +17,7 @@ module.exports = function (app, server) {
 
     const io = require('socket.io')(server, {
         cors: {
-            origin: "http://127.0.0.1:5000",
+            origin: "*",
             methods: ["GET", "POST"]
         }
     })
@@ -24,7 +26,5 @@ module.exports = function (app, server) {
 
     app.use(function (req, res, next) { req.io = io; next(); });
 
-    app.get('/test', (req, res, next) => {
-        res.status(200).json({ hello: 'world' })
-    })
+    app.use('/messages', require('./router/message.router'));
 }

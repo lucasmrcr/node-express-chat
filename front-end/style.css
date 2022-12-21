@@ -137,7 +137,7 @@ b {
 }
 .window-wrapper {
   background: #fff;
-  width: 780px;
+  width: 1000px;
   margin: 30px auto;
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
@@ -288,7 +288,7 @@ b {
 .chat-area ul .name {
   padding: 14px;
   text-align: right;
-  width: 100px;
+  width: 150px;
   float: left;
   color: #5d7185;
   font-weight: bold;
