@@ -26,7 +26,5 @@ module.exports = function (app, server) {
 
     app.use(function (req, res, next) { req.io = io; next(); });
 
-    app.get('/test', (req, res, next) => {
-        res.status(200).json({ hello: 'world' })
-    })
+    app.use('/messages', require('./router/message.router'));
 }

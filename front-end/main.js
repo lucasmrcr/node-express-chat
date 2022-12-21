@@ -40,10 +40,12 @@
     sendMessageText.value = '';
   });
 
-  fetch(`${server}/test`).then((res) => {
+  fetch(`${server}/messages`).then((res) => {
     return res.json();
   }).then((data) => {
-    console.log(data);
+    for(let datum of data) {
+      domChatHandler.messageReceivedEvent(datum);
+    }
   });
 
 })();
