@@ -2,6 +2,13 @@
   const server = 'http://127.0.0.1:3000';
   const socket = io(server);
   const messageContainer = document.querySelector('#message-container');
+  const connectedMembers = document.querySelector('#connected-members');
+  const memberList = document.querySelector('#member-list');
+
+  const nickname = prompt('Pseudo ?');
+
+  socket.emit('nickname', nickname);
+
   const domChatHandler = {
     messageReceivedEvent: function (data) {
       const li = document.createElement('li');
@@ -23,11 +30,32 @@
       divMessage.appendChild(spanTime);
       li.appendChild(divMessage);
       messageContainer.appendChild(li);
+    },
+    updateConnectedClients: function (metrics) {
+      memberList.innerHTML = '';
+      for (let client in metrics.clients) {
+        const li = document.createElement('li');
+        const spanStatus = document.createElement('span');
+        spanStatus.classList.add('status', 'online');
+        const i = document.createElement('i');
+        i.classList.add('fa', 'fa-circle-o');
+        spanStatus.appendChild(i);
+        li.appendChild(spanStatus);
+        const spanName = document.createElement('span');
+        spanName.textContent = `${client} (${metrics.clients[client]} message(s))`;
+        li.appendChild(spanName);
+        memberList.appendChild(li);
+      }
     }
   }
 
   socket.on('notification', (data) => {
     console.log('Message depuis le seveur:', data);
+  });
+
+  socket.on('metrics', (data) => {
+    connectedMembers.innerHTML = data.clients_connection.length;
+    domChatHandler.updateConnectedClients(data);
   });
 
   socket.on('chat', domChatHandler.messageReceivedEvent);
