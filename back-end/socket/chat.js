@@ -1,5 +1,4 @@
 module.exports = function (io) {
-
   io.on('connection', (socket) => {
     console.log(`Connecté au client ${socket.id}`)
     io.emit('notification', { type: 'new_user', data: socket.id });
@@ -10,8 +9,8 @@ module.exports = function (io) {
       io.emit('notification', { type: 'removed_user', data: socket.id });
     });
 
-    socket.on('...', (msg) => {
-
+    socket.on('chat', (text) => {
+      io.emit('chat', {from: socket.id, text});
     });
   })
 }

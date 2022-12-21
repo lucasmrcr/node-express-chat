@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 
-// export one function that gets called once as the server is being initialized
 module.exports = function (app, server) {
 
     app.use((req, res, next) => {
@@ -15,7 +14,7 @@ module.exports = function (app, server) {
 
     const io = require('socket.io')(server, {
         cors: {
-            origin: "http://127.0.0.1:5000",
+            origin: "*",
             methods: ["GET", "POST"]
         }
     })
