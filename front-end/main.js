@@ -29,11 +29,12 @@
       spanTime.textContent = new Date().toLocaleTimeString();
       divMessage.appendChild(spanTime);
       li.appendChild(divMessage);
-      messageContainer.appendChild(li);
+      messageContainer.insertBefore(li, messageContainer.childNodes[0]);
     },
     updateConnectedClients: function (metrics) {
       memberList.innerHTML = '';
-      for (let client in metrics.clients) {
+      console.log(metrics.clients_connection);
+      for (let client of metrics.clients_connection) {
         const li = document.createElement('li');
         const spanStatus = document.createElement('span');
         spanStatus.classList.add('status', 'online');
